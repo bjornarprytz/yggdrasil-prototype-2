@@ -14,6 +14,12 @@ func get_contrast_color(color: Color) -> Color:
 	else:
 		return Color(1, 1, 1) # White
 
+func random_point(rect: Rect2):
+	var x = randf_range(0.0,rect.size.x)
+	var y = randf_range(0.0,rect.size.y)
+	
+	return rect.position + Vector2(x, y)
+
 func random_color() -> Color:
 	return Color(
 		randf_range(0, 1),

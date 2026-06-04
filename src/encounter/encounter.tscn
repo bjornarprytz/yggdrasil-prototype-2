@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://charjcrxtkq82"]
+
+[ext_resource type="Script" uid="uid://cixwdp8dqqyhn" path="res://encounter/encounter.gd" id="1_twjq8"]
+
+[node name="Encounter" type="Node2D" unique_id=1849243508]
+script = ExtResource("1_twjq8")
+
+[node name="Title" type="RichTextLabel" parent="." unique_id=842773143]
+offset_right = 288.0
+offset_bottom = 77.0
+text = "Encounter Data"
+
+[node name="Data" type="RichTextLabel" parent="." unique_id=1185863615]
+unique_name_in_owner = true
+offset_left = 19.0
+offset_top = 92.0
+offset_right = 612.0
+offset_bottom = 368.0
+text = "Encounter Data"
+
+[node name="Button" type="Button" parent="." unique_id=1697601111]
+offset_left = 432.0
+offset_top = 72.0
+offset_right = 450.0
+offset_bottom = 103.0
+text = "<"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

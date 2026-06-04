@@ -1,70 +1,48 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgrejd4v5ywd3"]
+[gd_scene format=3 uid="uid://cgrejd4v5ywd3"]
 
 [ext_resource type="Script" uid="uid://736gp2f48fi7" path="res://main.gd" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://bfq2ku3f8tps3" path="res://player.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://dtrhwxrwnyycy" path="res://map/map.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://bey45jaa1bq6o" path="res://data/map_data.gd" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://charjcrxtkq82" path="res://encounter/encounter.tscn" id="4_1bvp3"]
 
-[node name="Main" type="Node2D"]
+[sub_resource type="Resource" id="Resource_1bvp3"]
+script = ExtResource("3_h2yge")
+layers = Array[int]([2, 3, 2, 3])
+metadata/_custom_type_script = "uid://bey45jaa1bq6o"
+
+[node name="Main" type="Node2D" unique_id=817841868]
 script = ExtResource("1_ig7tw")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=958590798]
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
-texture_filter = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -226.0
-offset_top = 151.0
-offset_right = 227.0
-offset_bottom = 329.0
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1377326614]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 126.0
 grow_horizontal = 2
-grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/PanelContainer"]
-layout_mode = 2
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Title" type="RichTextLabel" parent="CanvasLayer/PanelContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"Title"
-bbcode_enabled = true
-text = "This is the title"
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=1366849762]
+offset_left = 595.0
+offset_top = 17.0
+offset_right = 662.0
+offset_bottom = 105.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 64
+text = "UI"
 fit_content = true
-scroll_active = false
+autowrap_mode = 0
 
-[node name="Title2" type="RichTextLabel" parent="CanvasLayer/PanelContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-bbcode_enabled = true
-text = "This is the main text, but [wave]there's more[/wave]"
-fit_content = true
-scroll_active = false
+[node name="MainView" type="Node2D" parent="." unique_id=959898095]
+unique_name_in_owner = true
+position = Vector2(0, 128)
 
-[node name="Button" type="Button" parent="CanvasLayer"]
-offset_left = 64.0
-offset_top = 562.0
-offset_right = 154.0
-offset_bottom = 632.0
-text = "Beep"
+[node name="Map" parent="MainView" unique_id=1377469786 instance=ExtResource("2_0xm2m")]
+unique_name_in_owner = true
+map_data = SubResource("Resource_1bvp3")
 
-[node name="Button2" type="Button" parent="CanvasLayer"]
-offset_left = 1070.0
-offset_top = 548.0
-offset_right = 1237.0
-offset_bottom = 661.0
-text = "Beep"
+[node name="Encounter" parent="MainView" unique_id=1849243508 instance=ExtResource("4_1bvp3")]
+unique_name_in_owner = true
+visible = false
 
-[node name="Player" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(637, 256)
-
-[connection signal="mouse_entered" from="CanvasLayer/Button" to="." method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_left_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Button2" to="." method="_on_right_button_pressed"]
+[connection signal="location_entered" from="MainView/Map" to="." method="_on_map_location_entered"]
+[connection signal="on_exit" from="MainView/Encounter" to="." method="_on_encounter_on_exit"]

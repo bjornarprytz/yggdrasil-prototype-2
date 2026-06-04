@@ -14,7 +14,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="GAME_NAME"
+config/name="yggdrasil-prototype-2"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -27,6 +27,8 @@ Create="*res://autoloads/factory.tscn"
 Audio="*res://autoloads/audio_manager.tscn"
 NodeEffects="*res://autoloads/node_effects.tscn"
 Settings="*res://autoloads/settings.tscn"
+Database="*uid://cwmdhcjjd3bjw"
+Pool="*uid://dftlmk115guj1"
 
 [display]
 
@@ -37,7 +39,7 @@ window/stretch/mode="viewport"
 
 [dotnet]
 
-project/assembly_name="GAME_NAME"
+project/assembly_name="yggdrasil-prototype-2"
 
 [editor_plugins]
 
