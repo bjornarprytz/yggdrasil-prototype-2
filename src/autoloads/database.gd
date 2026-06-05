@@ -1,17 +1,16 @@
 extends Node2D
 
-var items: Dictionary[String, ItemData] = {}
-var encounters: Dictionary[String, EncounterData] = {}
-var enemies: Dictionary[String, EnemyData] = {}
+var _elements: Dictionary[String, GameElement] = {}
 
+func add_element(element: GameElement):
+	if (_elements.has(element.id)):
+		push_warning("Trying to re-add existing element %s" % element.id)
+	else:
+		_elements[element.id] = element
 
 func get_element(id: String) -> GameElement:
-	if items.has(id):
-		return items[id]
-	if encounters.has(id):
-		return encounters[id]
-	if enemies.has(id):
-		return enemies[id]
+	if _elements.has(id):
+		return _elements[id]
 	
 	push_error("Asked for non-existent element: %s" % id)
 	return null

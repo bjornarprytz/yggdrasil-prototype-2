@@ -5,6 +5,10 @@ class DrawParams:
 	var exclude_tags: Array[String] = []
 	var metadata_match: Dictionary[String, RegEx] = {}
 	var type: String
+	
+	func _init(type_: String, include_tags_: Array[String]=[]):
+		type = type_
+		include_tags = include_tags_
 
 class PoolItem:
 	var id: String
@@ -14,7 +18,7 @@ class PoolItem:
 	func _init(element: GameElement, weight_: float=1.0) -> void:
 		id = element.id
 		weight = weight_
-		type = type_string(typeof(element))
+		type = element.get_type()
 
 var elements: Array[PoolItem] = []
 
@@ -25,6 +29,7 @@ func draw(params: DrawParams) -> GameElement:
 	for e in elements:
 		if params.type != e.type:
 			continue
+		
 		# TODO: Implement other filters
 		
 		weights.append(e.weight)

@@ -1,5 +1,5 @@
 class_name EncounterData
-extends GameElement
+extends Resource
 
 enum Type {
 	Start,
