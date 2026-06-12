@@ -7,13 +7,20 @@ extends Node2D
 
 @onready var health_label: RichTextLabel = %Health
 
-@onready var game_elements = preload("res://assets/game-elements.csv")
+@onready var events = preload("res://assets/events.csv")
+@onready var enemies = preload("res://assets/enemies.csv")
 
 func _ready() -> void:
-	for r in game_elements.records:
-		var element = GameElementParser.parse(r)
+	for r in events.records:
+		var element = GameElementParser.parse_event(r)
 		Database.add_element(element)
 		Pool.add(element)
+	
+	for r in enemies.records:
+		var element = GameElementParser.parse_enemy(r)
+		Database.add_element(element)
+		Pool.add(element)
+	
 
 	_update_health_label()
 	player.health.changed.connect(_on_health_changed)
@@ -31,7 +38,7 @@ func _update_health_label():
 	var max_health = player.health.max_health
 	health_label.text = "%d/%d" % [player.health.current_health, max_health]
 
-func _on_health_changed(new_health: int, change: int) -> void:
+func _on_health_changed(_new_health: int, change: int) -> void:
 	_update_health_label()
 
 	var positive = change > 0

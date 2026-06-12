@@ -19,7 +19,7 @@ func _ready() -> void:
 	button.self_modulate = encounter.type_color
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (is_current):
 		button.position.y = pingpong(Time.get_ticks_msec() / 100.0, 10)
 	else:

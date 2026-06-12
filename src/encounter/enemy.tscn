@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c6psdl1i6umvf"]
+
+[ext_resource type="Script" uid="uid://1711hq1ta6fp" path="res://encounter/enemy.gd" id="1_wwy3p"]
+
+[node name="Enemy" type="Node2D" unique_id=1232566753]
+script = ExtResource("1_wwy3p")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=720872231]
+unique_name_in_owner = true
+
+[node name="Strength" type="RichTextLabel" parent="." unique_id=824830241]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 40.0

@@ -1,15 +1,5 @@
 extends Node2D
 
-class DrawParams:
-	var include_tags: Array[String] = []
-	var exclude_tags: Array[String] = []
-	var metadata_match: Dictionary[String, RegEx] = {}
-	var type: String
-	
-	func _init(type_: String, include_tags_: Array[String]=[]):
-		type = type_
-		include_tags = include_tags_
-
 class PoolItem:
 	var id: String
 	var type: String
@@ -20,30 +10,75 @@ class PoolItem:
 		weight = weight_
 		type = element.get_type()
 
-var elements: Array[PoolItem] = []
+## Array of PoolItem, indexed by id
+var elements: Dictionary[String, Array] = {}
 
-func draw(params: DrawParams) -> GameElement:
+## Draw an element from the pool matching the filters. Returns null if no match.
+func draw(filters: Database.Filters) -> GameElement:
+	if elements.is_empty():
+		push_warning("Trying to draw from empty pool")
+		return null
+
+	var candidates_and_weights = _get_candidates(filters)
+	var results = _draw_n_from_candidates(candidates_and_weights, 1)
+	
+	if results.is_empty():
+		push_warning("Trying to draw from pool with no matching candidates")
+		return null
+	
+	var result = results[0]
+	return result
+
+## Draw n elements from the pool matching the filters. Returns as many as possible if not enough matches.
+func draw_n(filters: Database.Filters, n: int) -> Array[GameElement]:
+	if elements.is_empty():
+		push_warning("Trying to draw from empty pool")
+		return []
+
+	var candidates_and_weights = _get_candidates(filters)
+	var results = _draw_n_from_candidates(candidates_and_weights, n)
+
+	return results
+
+func add(element: GameElement, weight: float = 1.0):
+	if not elements.has(element.id):
+		elements[element.id] = []
+	elements[element.id].append(PoolItem.new(element, weight))
+
+func _draw_n_from_candidates(candidates_and_weights: Array[Array], n: int) -> Array[GameElement]:
+	assert(n > 0, "draw_n should be called with n > 0")
+	var candidates: Array[GameElement] = candidates_and_weights[0]
+	var weights: PackedFloat32Array = candidates_and_weights[1]
+
+	if (candidates.size() <= n):
+		return candidates
+
+	var rng = RandomNumberGenerator.new()
+	var results: Array[GameElement] = []
+	for i in range(n):
+		var index = rng.rand_weighted(weights)
+		var result = candidates[index]
+		candidates.remove_at(index)
+		weights.remove_at(index)
+		results.append(result)
+	return results
+
+func _get_candidates(filters: Database.Filters) -> Array[Array]:
 	var candidates : Array[GameElement]
 	var weights: PackedFloat32Array = []
+
+	var matches = Database.query(filters)
 	
-	for e in elements:
-		if params.type != e.type:
+	for e in matches:
+		if not elements.has(e.id) or elements[e.id].is_empty():
 			continue
-		
-		# TODO: Implement other filters
-		
-		weights.append(e.weight)
-		candidates.append(Database.get_element(e.id))
+
+		var pool_items = elements[e.id]
+		for i in range(pool_items.size()):
+			var item = pool_items[i]
+			weights.append(item.weight)
+			candidates.append(Database.get_element(item.id))
 	
-	if (candidates.is_empty()):
-		return null
-	if (candidates.size() == 1):
-		return candidates[0]
-	
-	var rng = RandomNumberGenerator.new()
-	
-	return candidates[rng.rand_weighted(weights)]
-	
-func add(element: GameElement, weight: float = 1.0):
-	elements.append(PoolItem.new(element, weight))
+	return [candidates, weights]
+
 	

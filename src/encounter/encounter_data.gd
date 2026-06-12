@@ -10,9 +10,11 @@ enum Type {
 	Boss
 }
 var type : Type
+var properties: Dictionary = {}
 
-func _init(t: Type):
+func _init(t: Type, props: Dictionary = {}):
 	type = t
+	properties = props
 
 var type_str: String:
 	get:

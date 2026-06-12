@@ -28,6 +28,7 @@ Audio="*res://autoloads/audio_manager.tscn"
 NodeEffects="*res://autoloads/node_effects.tscn"
 Settings="*res://autoloads/settings.tscn"
 Database="*uid://cwmdhcjjd3bjw"
+ElementProviders="*uid://p4kk0wlunrnc"
 Pool="*uid://dftlmk115guj1"
 
 [display]

@@ -3,23 +3,29 @@ extends Resource
 
 const MAX_OPTIONS:=10
 
-static func parse(record : Dictionary) -> GameElement:
-	if (record["Type"] == "event"):
-		var e = EventData.new()
-		e.id = record["Name"]
-		e.intro_text = record["IntroText"]
-		e.background = record["Background"]
-		for i in range(1, MAX_OPTIONS):
-			var key = "Option%d" % i
-			if not record.has(key):
-				break
-			e.options.append(record[key])
-		if record.has("Tags"):
-			for t in record["Tags"].split("|"):
-				e.tags.append(t)
-		
-		return e
+static func parse_event(record : Dictionary) -> GameElement:
+	var e = EventData.new()
+	e.id = record["Name"]
+	e.intro_text = record["IntroText"]
+	e.background = record["Background"]
+	for i in range(1, MAX_OPTIONS):
+		var key = "Option%d" % i
+		if not record.has(key):
+			break
+		e.options.append(record[key])
+	if record.has("Tags"):
+		for t in record["Tags"].split("|"):
+			e.tags.append(t)
 	
-	push_error("Not yet implemented")
-	
-	return null
+	return e
+
+
+static func parse_enemy(record : Dictionary) -> GameElement:
+	var e = EnemyData.new()
+	e.id = record["Name"]
+	e.strength = record["Strength"]
+	e.sprite_path = record["Sprite"]
+	if record.has("Tags"):
+		for t in record["Tags"].split("|"):
+			e.tags.append(t)
+	return e

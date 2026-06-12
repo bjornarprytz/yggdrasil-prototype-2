@@ -6,3 +6,7 @@ static func static_type() -> String:
 
 func get_type() -> String:
 	return static_type()
+
+var name: String
+var strength: int
+var sprite_path: String
