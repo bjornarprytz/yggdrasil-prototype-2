@@ -4,6 +4,12 @@ const ENEMIES_PATH: StringName = "res://data/enemies"
 const EVENTS_PATH: StringName = "res://data/events"
 
 
+func get_all_paths() -> Array[String]:
+	var paths: Array[String] = []
+	paths.append_array(_enumerate_files(ENEMIES_PATH))
+	paths.append_array(_enumerate_files(EVENTS_PATH))
+	return paths
+
 func load_enemies() -> Array[EnemyData]:
 	var enemies: Array[EnemyData] = []
 	for file in _enumerate_files(ENEMIES_PATH):

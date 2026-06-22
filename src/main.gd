@@ -8,17 +8,23 @@ extends Node2D
 @onready var health_label: RichTextLabel = %Health
 
 func _ready() -> void:
+	var screen: LoadingScreen = preload("res://loading_screen/loading_screen.tscn").instantiate()
+	add_child(screen)
+	screen.loading_complete.connect(_on_loading_complete.bind(screen))
+	screen.start(DataLoader.get_all_paths())
+
+func _on_loading_complete(screen: LoadingScreen) -> void:
 	for element in DataLoader.load_events():
 		Database.add_element(element)
 		Pool.add(element)
-	
+
 	for element in DataLoader.load_enemies():
 		Database.add_element(element)
 		Pool.add(element)
-	
 
 	_update_health_label()
 	player.health.changed.connect(_on_health_changed)
+	screen.queue_free()
 
 func _on_map_location_entered(location: Location) -> void:
 	map.hide()

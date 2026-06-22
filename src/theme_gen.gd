@@ -67,3 +67,8 @@ func define_theme():
 		normal_font = title_font,
 		normal_font_size = title_font_size
 	})
+
+	define_variant_style("LoadingBar", "ProgressBar", {
+		fill = stylebox_flat({ bg_color = Color.WHITE }),
+		background = stylebox_flat({ bg_color = Color(0.2, 0.2, 0.2) })
+	})
