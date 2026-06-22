@@ -9,5 +9,5 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	assert(data != null)
-	sprite.texture = load("res://assets/%s" % data.sprite_path)
+	sprite.texture = data.sprite
 	strength.text = str(data.strength)

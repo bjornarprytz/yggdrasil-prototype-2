@@ -36,7 +36,7 @@ func load_event():
 
 	data_label.text = element.intro_text
 	
-	background.texture = load("res://assets/%s" % element.background)
+	background.texture = element.background
 
 func load_combat():
 	var result = Pool.draw(Database.Filters.new(EnemyData.static_type()))

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://2nsah6pfpf00"]
+
+[ext_resource type="Script" uid="uid://c6s8l75dxwaek" path="res://resources/enemy_data.gd" id="1_5vrln"]
+[ext_resource type="Texture2D" uid="uid://dmega1indaug1" path="res://assets/img/orc.png" id="2_0u2d2"]
+
+[resource]
+script = ExtResource("1_5vrln")
+sprite = ExtResource("2_0u2d2")
+strength = 2
+id = "orc"
+metadata = Dictionary[String, String]({
+"Key": "Value"
+})
+tags = Array[String](["large", "green"])
+metadata/_custom_type_script = "uid://c6s8l75dxwaek"

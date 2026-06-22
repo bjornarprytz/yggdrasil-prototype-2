@@ -7,17 +7,12 @@ extends Node2D
 
 @onready var health_label: RichTextLabel = %Health
 
-@onready var events = preload("res://assets/events.csv")
-@onready var enemies = preload("res://assets/enemies.csv")
-
 func _ready() -> void:
-	for r in events.records:
-		var element = GameElementParser.parse_event(r)
+	for element in DataLoader.load_events():
 		Database.add_element(element)
 		Pool.add(element)
 	
-	for r in enemies.records:
-		var element = GameElementParser.parse_enemy(r)
+	for element in DataLoader.load_enemies():
 		Database.add_element(element)
 		Pool.add(element)
 	

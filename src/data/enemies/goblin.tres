@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://qubesojb0bt6"]
+
+[ext_resource type="Script" uid="uid://c6s8l75dxwaek" path="res://resources/enemy_data.gd" id="1_4y8k2"]
+[ext_resource type="Texture2D" uid="uid://7g5by1lp4jbj" path="res://assets/img/goblin.png" id="2_dk6at"]
+
+[resource]
+script = ExtResource("1_4y8k2")
+sprite = ExtResource("2_dk6at")
+strength = 1
+id = "goblin"
+tags = Array[String](["small", "green"])
+metadata/_custom_type_script = "uid://c6s8l75dxwaek"
