@@ -58,4 +58,4 @@ visible = false
 unique_name_in_owner = true
 
 [connection signal="location_entered" from="MainView/Map" to="." method="_on_map_location_entered"]
-[connection signal="on_exit" from="MainView/Encounter" to="." method="_on_encounter_on_exit"]
+[connection signal="resolved" from="MainView/Encounter" to="." method="_on_encounter_resolved"]

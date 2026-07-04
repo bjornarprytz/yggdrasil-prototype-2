@@ -2,6 +2,7 @@ class_name Player
 extends Node2D
 
 var inventory: Array[ItemData] = []
+var resources: Dictionary[String, int] = {}
 @onready var health: Health = %Health
 
 # Called when the node enters the scene tree for the first time.

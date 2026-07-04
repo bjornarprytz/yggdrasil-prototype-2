@@ -8,6 +8,6 @@ func get_type() -> String:
 	return static_type()
 
 @export var intro_text: String
-@export var options: Array[String] = []
+@export var options: Array[EventOption] = []
 
 @export var background: Texture2D

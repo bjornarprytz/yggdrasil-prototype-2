@@ -31,6 +31,7 @@ Database="*uid://cwmdhcjjd3bjw"
 ElementProviders="*uid://p4kk0wlunrnc"
 Pool="*uid://dftlmk115guj1"
 DataLoader="*uid://kfd4umibp8ll"
+OutcomeResolver="*res://autoloads/outcome_resolver.gd"
 _mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
 
 [display]

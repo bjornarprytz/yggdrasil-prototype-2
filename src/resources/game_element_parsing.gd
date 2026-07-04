@@ -12,7 +12,9 @@ static func parse_event(record : Dictionary) -> GameElement:
 		var key = "Option%d" % i
 		if not record.has(key):
 			break
-		e.options.append(record[key])
+		var opt := EventOption.new()
+		opt.label = record[key]
+		e.options.append(opt)
 	if record.has("Tags"):
 		for t in record["Tags"].split("|"):
 			e.tags.append(t)

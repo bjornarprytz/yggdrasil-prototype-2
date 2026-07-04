@@ -27,11 +27,18 @@ func _on_loading_complete(screen: LoadingScreen) -> void:
 	screen.queue_free()
 
 func _on_map_location_entered(location: Location) -> void:
+	if location.encounter.type == EncounterData.Type.Start:
+		return
 	map.hide()
-	encounter.load_data(location.encounter)
 	encounter.show()
+	encounter.start(location.encounter)
 
-func _on_encounter_on_exit() -> void:
+func _on_encounter_resolved(outcomes: Array[Outcome]) -> void:
+	OutcomeResolver.apply_all(outcomes, player)
+	for outcome in outcomes:
+		if outcome.type == Outcome.Type.TRIGGER_ENCOUNTER:
+			encounter.start(EncounterData.new(outcome.encounter_type))
+			return
 	encounter.hide()
 	map.show()
 
@@ -45,7 +52,7 @@ func _on_health_changed(_new_health: int, change: int) -> void:
 	var positive = change > 0
 	if positive:
 		health_label.self_modulate = Color(0, 1, 0)
-	else:		
+	else:
 		health_label.self_modulate = Color(1, 0, 0)
 
 	var t = create_tween()

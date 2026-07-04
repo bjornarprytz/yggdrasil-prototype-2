@@ -7,7 +7,7 @@ signal loading_complete
 @onready var _spinner: ColorRect = %Spinner
 
 const SPIN_SPEED: float = TAU  # one full rotation per second
-const MIN_DURATION: float = 5.0
+const MIN_DURATION: float = .2
 
 var _pending: Array[String] = []
 var _total: int = 0

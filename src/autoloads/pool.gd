@@ -40,6 +40,9 @@ func draw_n(filters: Database.Filters, n: int) -> Array[GameElement]:
 
 	return results
 
+func remove(element_id: String) -> void:
+	elements.erase(element_id)
+
 func add(element: GameElement, weight: float = 1.0):
 	if not elements.has(element.id):
 		elements[element.id] = []
