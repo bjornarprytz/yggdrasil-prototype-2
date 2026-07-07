@@ -2,11 +2,22 @@
 
 [ext_resource type="Texture2D" uid="uid://tjxa5guydml3" path="res://assets/img/devo-disc.png" id="1_5qaqf"]
 [ext_resource type="Script" uid="uid://ciwyoqsjlajel" path="res://resources/event_data.gd" id="1_kb4s2"]
+[ext_resource type="Script" uid="uid://dsyh1kntk4dqu" path="res://resources/event_option.gd" id="1_opt"]
+
+[sub_resource type="Resource" id="Option_1"]
+script = ExtResource("1_opt")
+label = "Repair it"
+outcomes = Array[Object]([])
+
+[sub_resource type="Resource" id="Option_2"]
+script = ExtResource("1_opt")
+label = "Ford it"
+outcomes = Array[Object]([])
 
 [resource]
 script = ExtResource("1_kb4s2")
 intro_text = "You approach a ruined bridge"
-options = Array[String](["Repair it", "Ford it"])
+options = Array[Object]([SubResource("Option_1"), SubResource("Option_2")])
 background = ExtResource("1_5qaqf")
 id = "bridge"
 metadata/_custom_type_script = "uid://ciwyoqsjlajel"

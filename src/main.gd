@@ -31,13 +31,13 @@ func _on_map_location_entered(location: Location) -> void:
 		return
 	map.hide()
 	encounter.show()
-	encounter.start(location.encounter)
+	encounter.start(location.encounter, player)
 
 func _on_encounter_resolved(outcomes: Array[Outcome]) -> void:
 	OutcomeResolver.apply_all(outcomes, player)
 	for outcome in outcomes:
 		if outcome.type == Outcome.Type.TRIGGER_ENCOUNTER:
-			encounter.start(EncounterData.new(outcome.encounter_type))
+			encounter.start(EncounterData.new(outcome.encounter_type), player)
 			return
 	encounter.hide()
 	map.show()
