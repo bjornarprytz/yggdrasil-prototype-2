@@ -60,8 +60,7 @@ func _default_weapon() -> WeaponData:
 	return w
 
 func _on_enemy_died() -> void:
-	var gold := Outcome.new()
-	gold.type = Outcome.Type.RESOURCE_CHANGE
+	var gold := ResourceChange.new()
 	gold.resource_type = "gold"
 	gold.amount_min = _enemy_data.strength * 4
 	gold.amount_max = _enemy_data.strength * 8

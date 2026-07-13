@@ -34,11 +34,11 @@ func _on_map_location_entered(location: Location) -> void:
 	encounter.start(location.encounter, player)
 
 func _on_encounter_resolved(outcomes: Array[Outcome]) -> void:
-	OutcomeResolver.apply_all(outcomes, player)
-	for outcome in outcomes:
-		if outcome.type == Outcome.Type.TRIGGER_ENCOUNTER:
-			encounter.start(EncounterData.new(outcome.encounter_type), player)
-			return
+	var context := GameContext.new(player)
+	OutcomeResolver.apply_all(outcomes, context)
+	if not context.pending_encounters.is_empty():
+		encounter.start(context.pending_encounters[0], player)
+		return
 	encounter.hide()
 	map.show()
 
