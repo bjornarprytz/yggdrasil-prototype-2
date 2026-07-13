@@ -1,7 +1,7 @@
 class_name Player
 extends Node2D
 
-var inventory: Array[ItemData] = []
+var inventory: Inventory = Inventory.new()
 var resources: Dictionary[String, int] = {}
 @onready var health: Health = %Health
 

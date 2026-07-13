@@ -31,10 +31,11 @@ func setup(enemy_data: EnemyData, player: Player) -> void:
 	_enemy_node.died.connect(_on_enemy_died)
 	add_child(_enemy_node)
 
-func _find_weapon(inventory: Array[ItemData]) -> WeaponData:
-	for item in inventory:
-		if item is WeaponData:
-			return item
+func _find_weapon(inventory: Inventory) -> WeaponData:
+	if inventory.left_hand:
+		return inventory.left_hand
+	if inventory.right_hand:
+		return inventory.right_hand
 	return _default_weapon()
 
 func _default_weapon() -> WeaponData:

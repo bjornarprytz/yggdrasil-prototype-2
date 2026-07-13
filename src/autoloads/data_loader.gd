@@ -2,6 +2,7 @@ extends Node
 
 const ENEMIES_PATH: StringName = "res://data/enemies"
 const EVENTS_PATH: StringName = "res://data/events"
+const ITEMS_PATH: StringName = "res://data/items"
 
 
 func get_all_paths() -> Array[String]:
@@ -25,6 +26,14 @@ func load_events() -> Array[EventData]:
 		events.append(enemy)
 	
 	return events
+
+func load_items() -> Array[ItemData]:
+	var items: Array[ItemData] = []
+	for file in _enumerate_files(ITEMS_PATH):
+		var item: ItemData = load(file) as ItemData
+		items.append(item)
+	
+	return items
 
 
 func _enumerate_files(path: String) -> Array[String]:

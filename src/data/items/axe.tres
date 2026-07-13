@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://bmayxftvyvjc7"]
+
+[ext_resource type="Script" uid="uid://n13mc1ts0uks" path="res://resources/move.gd" id="1_74bhg"]
+[ext_resource type="Script" uid="uid://bpxujorn80t7p" path="res://resources/weapon_data.gd" id="2_t363m"]
+
+[sub_resource type="Resource" id="Resource_mrioi"]
+script = ExtResource("1_74bhg")
+damage = 20
+metadata/_custom_type_script = "uid://n13mc1ts0uks"
+
+[sub_resource type="Resource" id="Resource_ovxdx"]
+script = ExtResource("1_74bhg")
+metadata/_custom_type_script = "uid://n13mc1ts0uks"
+
+[resource]
+script = ExtResource("2_t363m")
+light_attack = SubResource("Resource_ovxdx")
+heavy_attack = SubResource("Resource_mrioi")
+id = "axe"
+metadata/_custom_type_script = "uid://bpxujorn80t7p"

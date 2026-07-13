@@ -12,6 +12,7 @@ func _ready() -> void:
 	add_child(screen)
 	screen.loading_complete.connect(_on_loading_complete.bind(screen))
 	screen.start(DataLoader.get_all_paths())
+	player.inventory.item_equipped.connect(_on_item_equipped)
 
 func _on_loading_complete(screen: LoadingScreen) -> void:
 	for element in DataLoader.load_events():
@@ -19,6 +20,10 @@ func _on_loading_complete(screen: LoadingScreen) -> void:
 		Pool.add(element)
 
 	for element in DataLoader.load_enemies():
+		Database.add_element(element)
+		Pool.add(element)
+
+	for element in DataLoader.load_items():
 		Database.add_element(element)
 		Pool.add(element)
 
@@ -57,3 +62,7 @@ func _on_health_changed(_new_health: int, change: int) -> void:
 
 	var t = create_tween()
 	t.tween_property(health_label, "self_modulate", Color(1, 1, 1), 0.2)
+
+
+func _on_item_equipped(item: ItemData) -> void:
+	print("Item equipped: %s" % item.id)

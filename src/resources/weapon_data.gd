@@ -3,3 +3,6 @@ extends ItemData
 
 @export var light_attack: Move
 @export var heavy_attack: Move
+
+func slot() -> String:
+	return "hand"

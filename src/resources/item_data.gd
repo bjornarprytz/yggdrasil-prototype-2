@@ -6,3 +6,6 @@ static func static_type() -> String:
 
 func get_type() -> String:
 	return static_type()
+
+func slot() -> String:
+	return ""
