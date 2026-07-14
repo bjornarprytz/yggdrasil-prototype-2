@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://cgrejd4v5ywd3"]
+
+[ext_resource type="Script" uid="uid://736gp2f48fi7" path="res://ui/main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://dtrhwxrwnyycy" path="res://ui/map/map.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://bey45jaa1bq6o" path="res://sys/map_data.gd" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://charjcrxtkq82" path="res://ui/encounter/encounter.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://05si5og1xfdv" path="res://sys/player.tscn" id="5_lquwl"]
+
+[sub_resource type="Resource" id="Resource_1bvp3"]
+script = ExtResource("3_h2yge")
+layers = Array[int]([2, 3, 2, 3])
+metadata/_custom_type_script = "uid://bey45jaa1bq6o"
+
+[node name="Main" type="Node2D" unique_id=817841868]
+script = ExtResource("1_ig7tw")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=958590798]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1377326614]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 126.0
+grow_horizontal = 2
+
+[node name="HealthInfo" type="HBoxContainer" parent="CanvasLayer" unique_id=2105739976]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HealthIcon" type="RichTextLabel" parent="CanvasLayer/HealthInfo" unique_id=1366849762]
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 64
+text = "<3:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Health" type="RichTextLabel" parent="CanvasLayer/HealthInfo" unique_id=2031106541]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 64
+text = "0/0"
+fit_content = true
+autowrap_mode = 0
+
+[node name="MainView" type="Node2D" parent="." unique_id=959898095]
+position = Vector2(0, 128)
+
+[node name="Map" parent="MainView" unique_id=1377469786 instance=ExtResource("2_0xm2m")]
+unique_name_in_owner = true
+map_data = SubResource("Resource_1bvp3")
+
+[node name="Encounter" parent="MainView" unique_id=1849243508 instance=ExtResource("4_1bvp3")]
+unique_name_in_owner = true
+visible = false
+
+[node name="Player" parent="." unique_id=491990234 instance=ExtResource("5_lquwl")]
+unique_name_in_owner = true
+
+[connection signal="location_entered" from="MainView/Map" to="." method="_on_map_location_entered"]
+[connection signal="resolved" from="MainView/Encounter" to="." method="_on_encounter_resolved"]

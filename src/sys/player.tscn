@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://05si5og1xfdv"]
+
+[ext_resource type="Script" uid="uid://cv4lulh4rgrty" path="res://sys/player.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://dtxqtantbufwc" path="res://sys/health.tscn" id="2_onrkg"]
+
+[node name="Player" type="Node2D" unique_id=491990234]
+script = ExtResource("1_4flbx")
+
+[node name="Health" parent="." unique_id=896087520 instance=ExtResource("2_onrkg")]
+unique_name_in_owner = true

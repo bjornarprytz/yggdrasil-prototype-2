@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EventData" format=3 uid="uid://drsl1u5m5y1j1"]
+
+[ext_resource type="Script" uid="uid://dsyh1kntk4dqu" path="res://resources/event_option.gd" id="1_xmsjc"]
+[ext_resource type="Script" uid="uid://7ist81o0gbb3" path="res://resources/outcome.gd" id="2_e3eyr"]
+[ext_resource type="Script" uid="uid://ciwyoqsjlajel" path="res://resources/event_data.gd" id="2_gbk5i"]
+[ext_resource type="Script" uid="uid://4apitywjqg57" path="res://resources/outcomes/resource_change.gd" id="3_flktu"]
+
+[sub_resource type="Resource" id="Resource_flktu"]
+script = ExtResource("3_flktu")
+resource_type = "health"
+amount_min = -5
+amount_max = -3
+metadata/_custom_type_script = "uid://4apitywjqg57"
+
+[sub_resource type="Resource" id="Resource_e3eyr"]
+script = ExtResource("1_xmsjc")
+label = "Swim for your life"
+outcomes = Array[ExtResource("2_e3eyr")]([SubResource("Resource_flktu")])
+metadata/_custom_type_script = "uid://dsyh1kntk4dqu"
+
+[resource]
+script = ExtResource("2_gbk5i")
+intro_text = "The river has flooded"
+options = Array[ExtResource("1_xmsjc")]([SubResource("Resource_e3eyr")])
+id = "flood"
+metadata/_custom_type_script = "uid://ciwyoqsjlajel"

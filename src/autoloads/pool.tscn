@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://dftlmk115guj1"]
-
-[ext_resource type="Script" uid="uid://5lcob2thx6o5" path="res://autoloads/pool.gd" id="1_3nxom"]
-
-[node name="Pool" type="Node2D" unique_id=100469483]
-script = ExtResource("1_3nxom")

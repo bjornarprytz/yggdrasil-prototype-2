@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dtrhwxrwnyycy"]
+
+[ext_resource type="Script" uid="uid://fer4t4lt5rvm" path="res://ui/map/map.gd" id="1_c7s6e"]
+
+[node name="Map" type="Node2D" unique_id=1377469786]
+script = ExtResource("1_c7s6e")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1639934424]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.51980686, 0.5280809, 0.35050964, 1)
+
+[node name="Connections" type="Node2D" parent="." unique_id=1275949242]
+unique_name_in_owner = true
+
+[node name="Locations" type="Node2D" parent="." unique_id=2104031071]
+unique_name_in_owner = true

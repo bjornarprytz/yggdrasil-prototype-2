@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://i5bdpg8d7fj0"]
+
+[ext_resource type="Script" uid="uid://bcshq4p83pxyq" path="res://sys/move_node.gd" id="1_6kapx"]
+
+[node name="Move" type="Node"]
+script = ExtResource("1_6kapx")
