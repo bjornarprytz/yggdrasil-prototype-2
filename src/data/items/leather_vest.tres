@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ChestData" format=3]
+
+[ext_resource type="Script" uid="uid://cmy0hvejlcy1v" path="res://sys/items/chest_data.gd" id="1_chest"]
+
+[resource]
+script = ExtResource("1_chest")
+id = "leather_vest"
+metadata/_custom_type_script = "uid://cmy0hvejlcy1v"

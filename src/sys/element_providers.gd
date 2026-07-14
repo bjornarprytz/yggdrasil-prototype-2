@@ -20,5 +20,5 @@ func resource_outcomes(mutations: Dictionary[String, int]) -> Array[Outcome]:
 		outcomes.append(o)
 	return outcomes
 
-func from_pool(filters: Database.Filters, n: int) -> Array[GameElement]:
+func from_pool(filters: DatabaseFilter, n: int) -> Array[GameElement]:
 	return Pool.draw_n(filters, n)

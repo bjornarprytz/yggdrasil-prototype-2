@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DrapeData" format=3]
+
+[ext_resource type="Script" uid="uid://bjqnvovdl3c4e" path="res://sys/items/drape_data.gd" id="1_drape"]
+
+[resource]
+script = ExtResource("1_drape")
+id = "traveler_cloak"
+metadata/_custom_type_script = "uid://bjqnvovdl3c4e"

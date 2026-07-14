@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3]
+
+[ext_resource type="Script" uid="uid://n13mc1ts0uks" path="res://sys/move.gd" id="1_move"]
+[ext_resource type="Script" uid="uid://bpxujorn80t7p" path="res://sys/weapon_data.gd" id="2_weapon"]
+
+[sub_resource type="Resource" id="Resource_light"]
+script = ExtResource("1_move")
+damage = 6
+knockback = Vector2(200, -50)
+startup_time = 0.04
+active_time = 0.08
+recovery_time = 0.12
+lunge_speed = 200.0
+metadata/_custom_type_script = "uid://n13mc1ts0uks"
+
+[sub_resource type="Resource" id="Resource_heavy"]
+script = ExtResource("1_move")
+damage = 14
+knockback = Vector2(320, -100)
+startup_time = 0.13
+active_time = 0.10
+recovery_time = 0.24
+lunge_speed = 110.0
+metadata/_custom_type_script = "uid://n13mc1ts0uks"
+
+[resource]
+script = ExtResource("2_weapon")
+light_attack = SubResource("Resource_light")
+heavy_attack = SubResource("Resource_heavy")
+id = "swift_dagger"
+metadata/_custom_type_script = "uid://bpxujorn80t7p"

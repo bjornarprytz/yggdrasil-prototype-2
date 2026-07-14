@@ -35,7 +35,7 @@ func start(data: EncounterData, player: Player) -> void:
 			_exit_button.show()
 
 func _start_event() -> void:
-	var event := Pool.draw(Database.Filters.new(EventData.static_type())) as EventData
+	var event := Pool.draw(DatabaseFilter.new(EventData.static_type())) as EventData
 	if event == null:
 		push_error("Encounter: no events in pool")
 		resolved.emit([] as Array[Outcome])
@@ -53,7 +53,7 @@ func _start_event() -> void:
 		_exit_button.hide()
 
 func _start_combat(required_tags: Array[String]) -> void:
-	var filters := Database.Filters.new(EnemyData.static_type())
+	var filters := DatabaseFilter.new(EnemyData.static_type())
 	filters.include_tags = required_tags
 	var enemy_data := Pool.draw(filters) as EnemyData
 	if enemy_data == null:

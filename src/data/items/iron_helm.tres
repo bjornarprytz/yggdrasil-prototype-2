@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="HeadData" format=3]
+
+[ext_resource type="Script" uid="uid://bj7grcqrcgp2n" path="res://sys/items/head_data.gd" id="1_head"]
+
+[resource]
+script = ExtResource("1_head")
+id = "iron_helm"
+metadata/_custom_type_script = "uid://bj7grcqrcgp2n"

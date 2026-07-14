@@ -14,7 +14,7 @@ class PoolItem:
 var elements: Dictionary[String, Array] = {}
 
 ## Draw an element from the pool matching the filters. Returns null if no match.
-func draw(filters: Database.Filters) -> GameElement:
+func draw(filters: DatabaseFilter) -> GameElement:
 	if elements.is_empty():
 		push_warning("Trying to draw from empty pool")
 		return null
@@ -30,7 +30,7 @@ func draw(filters: Database.Filters) -> GameElement:
 	return result
 
 ## Draw n elements from the pool matching the filters. Returns as many as possible if not enough matches.
-func draw_n(filters: Database.Filters, n: int) -> Array[GameElement]:
+func draw_n(filters: DatabaseFilter, n: int) -> Array[GameElement]:
 	if elements.is_empty():
 		push_warning("Trying to draw from empty pool")
 		return []
@@ -67,7 +67,7 @@ func _draw_n_from_candidates(candidates_and_weights: Array[Array], n: int) -> Ar
 		results.append(result)
 	return results
 
-func _get_candidates(filters: Database.Filters) -> Array[Array]:
+func _get_candidates(filters: DatabaseFilter) -> Array[Array]:
 	var candidates : Array[GameElement]
 	var weights: PackedFloat32Array = []
 

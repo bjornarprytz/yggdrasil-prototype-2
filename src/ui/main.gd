@@ -45,6 +45,19 @@ func _on_encounter_resolved(outcomes: Array[Outcome]) -> void:
 		encounter.start(context.pending_encounters[0], player)
 		return
 	encounter.hide()
+	if not context.pending_drafts.is_empty():
+		_start_draft(context.pending_drafts[0])
+		return
+	map.show()
+
+func _start_draft(draft: Draft) -> void:
+	var draft_ui := DraftUI.new()
+	add_child(draft_ui)
+	draft_ui.setup(draft, player)
+	draft_ui.completed.connect(_on_draft_completed.bind(draft_ui))
+
+func _on_draft_completed(draft_ui: DraftUI) -> void:
+	draft_ui.queue_free()
 	map.show()
 
 func _update_health_label():
