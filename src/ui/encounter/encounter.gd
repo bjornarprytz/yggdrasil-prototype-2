@@ -5,7 +5,7 @@ signal resolved(outcomes: Array[Outcome])
 
 @onready var _data_label: RichTextLabel = %Data
 @onready var _background: TextureRect = %Background
-@onready var _exit_button: Button = $Button
+@onready var _exit_button: Button = %Button
 
 var _options_container: VBoxContainer
 var _player: Player

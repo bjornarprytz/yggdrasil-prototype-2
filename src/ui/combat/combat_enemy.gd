@@ -11,10 +11,10 @@ const HIT_STUN_DURATION: float = 0.30
 
 enum State { CHASING, ATTACKING, HIT_STUN, DEAD }
 
-@onready var _sprite: Sprite2D = $Sprite2D
-@onready var _hitbox: Area2D = $Hitbox
-@onready var _hurtbox: Area2D = $Hurtbox
-@onready var _health: Health = $Health
+@onready var _sprite: Sprite2D = %Sprite2D
+@onready var _hitbox: Area2D = %Hitbox
+@onready var _hurtbox: Area2D = %Hurtbox
+@onready var _health: Health = %Health
 
 var data: EnemyData = null
 
@@ -46,7 +46,7 @@ func _ready() -> void:
 	_hurtbox.area_entered.connect(_on_hit)
 
 	if data.sprite:
-		$Sprite2D.texture = data.sprite
+		%Sprite2D.texture = data.sprite
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():

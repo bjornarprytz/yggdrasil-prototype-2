@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://h41tve0vnf7u"]
 
 [ext_resource type="Script" uid="uid://bpxota35y7t27" path="res://ui/map/location.gd" id="1_dit0l"]
-[ext_resource type="Texture2D" uid="uid://85p4vam34uiy" path="res://icon.svg" id="2_7r1oi"]
+[ext_resource type="Texture2D" uid="uid://85p4vam34uiy" path="res://assets/img/icon.svg" id="2_7r1oi"]
 
 [node name="Location" type="Node2D" unique_id=143523237]
 script = ExtResource("1_dit0l")

@@ -8,6 +8,7 @@ const FLOOR_Y: float = 480.0
 var _player_node: CombatPlayer
 var _enemy_node: CombatEnemy
 var _enemy_data: EnemyData
+var _input: CombatInput
 
 signal completed(outcomes: Array[Outcome])
 
@@ -24,6 +25,10 @@ func setup(enemy_data: EnemyData, player: Player) -> void:
 	_player_node.setup(player.health, weapon)
 	_player_node.died.connect(_on_player_died)
 	add_child(_player_node)
+
+	_input = CombatInput.new()
+	_input.target = _player_node
+	add_child(_input)
 
 	_enemy_node = preload("res://ui/combat/combat_enemy.tscn").instantiate()
 	_enemy_node.position = Vector2(ENEMY_START_X, FLOOR_Y - 54.0)
@@ -77,6 +82,9 @@ func _register_inputs() -> void:
 		"combat_light_attack":  [_key(KEY_J), _btn(JOY_BUTTON_X)],
 		"combat_heavy_attack":  [_key(KEY_K), _btn(JOY_BUTTON_Y)],
 		"combat_dodge":         [_key(KEY_SPACE), _btn(JOY_BUTTON_B)],
+		"combat_jump":          [_key(KEY_W), _btn(JOY_BUTTON_A)],
+		"combat_ranged":        [_key(KEY_U), _btn(JOY_BUTTON_LEFT_SHOULDER)],
+		"combat_special":       [_key(KEY_I), _btn(JOY_BUTTON_RIGHT_SHOULDER)],
 	}
 	for action in defs:
 		if InputMap.has_action(action):

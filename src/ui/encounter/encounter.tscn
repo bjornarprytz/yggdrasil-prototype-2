@@ -24,6 +24,7 @@ offset_bottom = 368.0
 text = "Encounter Data"
 
 [node name="Button" type="Button" parent="." unique_id=1697601111]
+unique_name_in_owner = true
 offset_left = 432.0
 offset_top = 72.0
 offset_right = 450.0

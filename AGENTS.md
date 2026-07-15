@@ -39,3 +39,7 @@ Do not reverse this: `ui` should not be a dependency of `sys`, and `sys` should 
 ## Within `sys`
 
 Systems may reference and depend on each other freely — `sys` is allowed to be as interconnected as necessary. The data/sys/ui layering is the hard boundary; internal coupling between systems is fine.
+
+## Node references
+
+Use the `%UniqueName` accessor for child node references, not `$RelativePath`. Mark the referenced node `unique_name_in_owner = true` in the scene. This keeps scripts resilient to nodes being moved/reparented within the scene tree.

@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://cbtplayer001"]
 
-[ext_resource type="Script" path="res://ui/combat/combat_player.gd" id="1_player"]
+[ext_resource type="Script" uid="uid://d0my7qwvo3hty" path="res://ui/combat/combat_player.gd" id="1_player"]
+[ext_resource type="Texture2D" uid="uid://b3j5t5dtouj45" path="res://assets/panel-texture.png" id="2_hnuo3"]
+[ext_resource type="Texture2D" uid="uid://85p4vam34uiy" path="res://assets/img/icon.svg" id="2_n3q26"]
 
 [sub_resource type="CapsuleShape2D" id="Shape_body"]
-radius = 18.0
-height = 30.0
+radius = 15.0
 
 [sub_resource type="RectangleShape2D" id="Shape_hitbox"]
 size = Vector2(52, 40)
@@ -12,25 +13,31 @@ size = Vector2(52, 40)
 [sub_resource type="RectangleShape2D" id="Shape_hurtbox"]
 size = Vector2(36, 58)
 
-[node name="CombatPlayer" type="CharacterBody2D"]
+[node name="CombatPlayer" type="CharacterBody2D" unique_id=1037117485]
 script = ExtResource("1_player")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1927581772]
 shape = SubResource("Shape_body")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=2093484493]
 unique_name_in_owner = true
 position = Vector2(38, -10)
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1918909225]
 shape = SubResource("Shape_hitbox")
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="Hitbox" unique_id=1157155199]
+scale = Vector2(0.8125, 0.59375)
+texture = ExtResource("2_hnuo3")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1906925396]
 unique_name_in_owner = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=393296224]
 shape = SubResource("Shape_hurtbox")
+
+[node name="Sprite2D" type="Sprite2D" parent="Hurtbox" unique_id=917380982]
+unique_name_in_owner = true
+scale = Vector2(0.28125, 0.453125)
+texture = ExtResource("2_n3q26")

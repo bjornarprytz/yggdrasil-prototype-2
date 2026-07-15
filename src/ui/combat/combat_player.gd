@@ -3,16 +3,17 @@ extends CharacterBody2D
 
 const GRAVITY: float = 980.0
 const MOVE_SPEED: float = 260.0
+const JUMP_SPEED: float = 480.0
 const DODGE_SPEED: float = 520.0
 const DODGE_DURATION: float = 0.28
-const DODGE_INVULN_END: float = 0.22  # invincibility ends slightly before dodge does
+const DODGE_INVULN_END: float = 0.22
 const HIT_STUN_DURATION: float = 0.38
 
 enum State { IDLE, ATTACKING, DODGING, HIT_STUN, DEAD }
 
-@onready var _sprite: Sprite2D = $Sprite2D
-@onready var _hitbox: Area2D = $Hitbox
-@onready var _hurtbox: Area2D = $Hurtbox
+@onready var _sprite: Sprite2D = %Sprite2D
+@onready var _hitbox: Area2D = %Hitbox
+@onready var _hurtbox: Area2D = %Hurtbox
 
 var health: Health = null
 var weapon: WeaponData = null
@@ -22,6 +23,9 @@ var _state_timer: float = 0.0
 var _facing: float = 1.0
 var _invincible: bool = false
 
+var _move_dir: float = 0.0
+var _jump_requested: bool = false
+
 signal died
 
 func setup(p_health: Health, p_weapon: WeaponData) -> void:
@@ -30,15 +34,53 @@ func setup(p_health: Health, p_weapon: WeaponData) -> void:
 	health.destroyed.connect(func(): _enter(State.DEAD))
 
 func _ready() -> void:
-	# Collision layers: player hitbox = 2, player hurtbox = 4
-	# Enemy hitbox = 8, enemy hurtbox = 16
 	_hitbox.collision_layer = 2
 	_hitbox.collision_mask = 0
 	_hitbox.monitoring = false
 	_hurtbox.collision_layer = 4
-	_hurtbox.collision_mask = 8   # detect enemy hitbox
+	_hurtbox.collision_mask = 8
 	_hurtbox.monitorable = true
 	_hurtbox.area_entered.connect(_on_hit)
+
+# --- Public API ---
+
+func move(dir: float) -> void:
+	_move_dir = dir
+
+func jump() -> void:
+	if _state == State.IDLE and is_on_floor():
+		_jump_requested = true
+
+func dodge() -> void:
+	if _state != State.IDLE:
+		return
+	_invincible = true
+	_enter(State.DODGING)
+	_state_timer = DODGE_DURATION
+	get_tree().create_timer(DODGE_INVULN_END).timeout.connect(
+		func(): _invincible = false, CONNECT_ONE_SHOT)
+
+func light_attack() -> void:
+	if _state != State.IDLE or weapon == null or not weapon.light_attack:
+		return
+	_begin_attack(weapon.light_attack)
+
+func heavy_attack() -> void:
+	if _state != State.IDLE or weapon == null or not weapon.heavy_attack:
+		return
+	_begin_attack(weapon.heavy_attack)
+
+func ranged_attack() -> void:
+	if _state != State.IDLE:
+		return
+	print("[CombatPlayer] ranged_attack — no ranged item equipped")
+
+func special() -> void:
+	if _state != State.IDLE:
+		return
+	print("[CombatPlayer] special — no trinket ability equipped")
+
+# --- Physics ---
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -48,8 +90,7 @@ func _physics_process(delta: float) -> void:
 
 	match _state:
 		State.IDLE:
-			_handle_movement()
-			_handle_actions()
+			_apply_movement()
 		State.ATTACKING:
 			velocity.x = move_toward(velocity.x, 0.0, 800.0 * delta)
 			if _state_timer == 0.0:
@@ -69,40 +110,28 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-func _handle_movement() -> void:
-	var dir := Input.get_axis("combat_move_left", "combat_move_right")
-	velocity.x = dir * MOVE_SPEED
-	if dir != 0.0:
-		_facing = signf(dir)
+func _apply_movement() -> void:
+	velocity.x = _move_dir * MOVE_SPEED
+	if _move_dir != 0.0:
+		_facing = signf(_move_dir)
 		_sprite.flip_h = _facing < 0.0
+	if _jump_requested:
+		velocity.y = -JUMP_SPEED
+		_jump_requested = false
 
-func _handle_actions() -> void:
-	if Input.is_action_just_pressed("combat_dodge"):
-		_invincible = true
-		_enter(State.DODGING)
-		_state_timer = DODGE_DURATION
-		get_tree().create_timer(DODGE_INVULN_END).timeout.connect(
-			func(): _invincible = false, CONNECT_ONE_SHOT)
-		return
-	if weapon == null:
-		return
-	if Input.is_action_just_pressed("combat_heavy_attack") and weapon.heavy_attack:
-		_begin_attack(weapon.heavy_attack)
-	elif Input.is_action_just_pressed("combat_light_attack") and weapon.light_attack:
-		_begin_attack(weapon.light_attack)
+# --- Internal ---
 
-func _begin_attack(move: Move) -> void:
+func _begin_attack(m: Move) -> void:
 	_enter(State.ATTACKING)
-	_state_timer = move.startup_time + move.active_time + move.recovery_time
-	velocity.x = _facing * move.lunge_speed
+	_state_timer = m.startup_time + m.active_time + m.recovery_time
+	velocity.x = _facing * m.lunge_speed
 	_hitbox.monitoring = false
-	_hitbox.set_meta("damage", move.damage)
-	_hitbox.set_meta("knockback", move.knockback)
+	_hitbox.set_meta("damage", m.damage)
+	_hitbox.set_meta("knockback", m.knockback)
 	_hitbox.set_meta("facing", _facing)
-	# Activate hitbox after startup, deactivate after active window
-	get_tree().create_timer(move.startup_time).timeout.connect(
+	get_tree().create_timer(m.startup_time).timeout.connect(
 		func(): _hitbox.monitoring = true, CONNECT_ONE_SHOT)
-	get_tree().create_timer(move.startup_time + move.active_time).timeout.connect(
+	get_tree().create_timer(m.startup_time + m.active_time).timeout.connect(
 		func(): _hitbox.monitoring = false, CONNECT_ONE_SHOT)
 
 func _on_hit(hitbox: Area2D) -> void:
