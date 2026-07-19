@@ -62,7 +62,16 @@ func define_theme():
 		hover = button_hover_style,
 		pressed = button_pressed_style,
 	})
-	
+
+	define_variant_style("LocationButton", "Button", {
+		normal = stylebox_empty({}),
+		hover = stylebox_empty({}),
+		pressed = stylebox_empty({}),
+		icon_normal_color = Color.WHITE,
+		icon_hover_color = Color(1.15, 1.15, 1.15, 1.0),
+		icon_pressed_color = Color(0.85, 0.85, 0.85, 1.0),
+	})
+
 	define_variant_style("Title", "RichTextLabel", {
 		normal_font = title_font,
 		normal_font_size = title_font_size

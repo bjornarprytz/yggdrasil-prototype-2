@@ -52,7 +52,19 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pfd5p"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pfd5p"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ahide"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fkrlu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o25jx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jgyo6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5bb6k"]
 content_margin_left = 45.0
 content_margin_top = 35.0
 content_margin_right = 45.0
@@ -71,7 +83,17 @@ default_font_size = 32
 Button/styles/hover = SubResource("StyleBoxFlat_arlvn")
 Button/styles/normal = SubResource("StyleBoxFlat_bq3ui")
 Button/styles/pressed = SubResource("StyleBoxFlat_q6bo0")
-PanelContainer/styles/panel = SubResource("StyleBoxTexture_pfd5p")
+LoadingBar/base_type = &"ProgressBar"
+LoadingBar/styles/background = SubResource("StyleBoxFlat_pfd5p")
+LoadingBar/styles/fill = SubResource("StyleBoxFlat_ahide")
+LocationButton/base_type = &"Button"
+LocationButton/colors/icon_hover_color = Color(1.15, 1.15, 1.15, 1)
+LocationButton/colors/icon_normal_color = Color(1, 1, 1, 1)
+LocationButton/colors/icon_pressed_color = Color(0.85, 0.85, 0.85, 1)
+LocationButton/styles/hover = SubResource("StyleBoxEmpty_fkrlu")
+LocationButton/styles/normal = SubResource("StyleBoxEmpty_o25jx")
+LocationButton/styles/pressed = SubResource("StyleBoxEmpty_jgyo6")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_5bb6k")
 Title/base_type = &"RichTextLabel"
 Title/font_sizes/normal_font_size = 64
 Title/fonts/normal_font = ExtResource("2_arlvn")
