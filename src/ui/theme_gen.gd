@@ -63,6 +63,22 @@ func define_theme():
 		pressed = button_pressed_style,
 	})
 
+	var compact_card_style = inherit(button_style, {
+		content_margin_ = content_margins(16, 8),
+		border_ = border_width(2),
+		corner_ = corner_radius(3),
+	})
+
+	var compact_card_hover_style = inherit(compact_card_style, {
+		bg_color = button_hover_color
+	})
+
+	define_variant_style("CompactItemCard", "Button", {
+		normal = compact_card_style,
+		hover = compact_card_hover_style,
+		pressed = compact_card_hover_style,
+	})
+
 	define_variant_style("LocationButton", "Button", {
 		normal = stylebox_empty({}),
 		hover = stylebox_empty({}),

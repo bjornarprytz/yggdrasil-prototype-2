@@ -52,6 +52,38 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ccard_n"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.078431375, 0.27450982, 0.627451, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9607843, 0.8352941, 0.2784314, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ccard_h"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.07058824, 0.24705882, 0.5647059, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9607843, 0.8352941, 0.2784314, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pfd5p"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
 
@@ -83,6 +115,10 @@ default_font_size = 32
 Button/styles/hover = SubResource("StyleBoxFlat_arlvn")
 Button/styles/normal = SubResource("StyleBoxFlat_bq3ui")
 Button/styles/pressed = SubResource("StyleBoxFlat_q6bo0")
+CompactItemCard/base_type = &"Button"
+CompactItemCard/styles/hover = SubResource("StyleBoxFlat_ccard_h")
+CompactItemCard/styles/normal = SubResource("StyleBoxFlat_ccard_n")
+CompactItemCard/styles/pressed = SubResource("StyleBoxFlat_ccard_h")
 LoadingBar/base_type = &"ProgressBar"
 LoadingBar/styles/background = SubResource("StyleBoxFlat_pfd5p")
 LoadingBar/styles/fill = SubResource("StyleBoxFlat_ahide")

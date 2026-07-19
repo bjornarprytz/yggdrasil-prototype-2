@@ -3,6 +3,7 @@ extends Node2D
 
 @onready var map: Map = %Map
 @onready var encounter: Encounter = %Encounter
+@onready var inventory_ui: InventoryUI = %Inventory
 @onready var player: Player = %Player
 
 @onready var health_label: RichTextLabel = %Health
@@ -13,6 +14,7 @@ func _ready() -> void:
 	screen.loading_complete.connect(_on_loading_complete.bind(screen))
 	screen.start(DataLoader.get_all_paths())
 	player.inventory.item_equipped.connect(_on_item_equipped)
+	inventory_ui.setup(player)
 
 func _on_loading_complete(screen: LoadingScreen) -> void:
 	for element in DataLoader.load_events():
@@ -79,3 +81,8 @@ func _on_health_changed(_new_health: int, change: int) -> void:
 
 func _on_item_equipped(item: ItemData) -> void:
 	print("Item equipped: %s" % item.id)
+
+func _on_inventory_button_pressed() -> void:
+	inventory_ui.visible = not inventory_ui.visible
+	if inventory_ui.visible:
+		inventory_ui.refresh()

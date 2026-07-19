@@ -38,14 +38,13 @@ func setup(draft: Draft, player: Player) -> void:
 		var item := element as ItemData
 		if not item:
 			continue
-		var btn := Button.new()
-		btn.custom_minimum_size = Vector2(200, 200)
-		btn.text = "%s\n\n[%s]" % [item.id.replace("_", " ").capitalize(), item.slot()]
-		btn.pressed.connect(_on_pick.bind(item, btn))
-		container.add_child(btn)
+		var card := Create.item_card(item)
+		card.custom_minimum_size = Vector2(200, 200)
+		card.pressed.connect(_on_pick.bind(item, card))
+		container.add_child(card)
 
-func _on_pick(item: ItemData, btn: Button) -> void:
-	btn.disabled = true
+func _on_pick(item: ItemData, card: ItemCard) -> void:
+	card.disabled = true
 	_player.inventory.equip(item)
 	_picks_remaining -= 1
 	if _picks_remaining <= 0:

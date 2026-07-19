@@ -1,0 +1,13 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://ui/inventory/item_card.gd" id="1_card"]
+
+[node name="ItemCard" type="Button"]
+custom_minimum_size = Vector2(140, 140)
+text_overrun_behavior = 3
+autowrap_mode = 2
+icon_alignment = 1
+vertical_icon_alignment = 0
+alignment = 1
+expand_icon = true
+script = ExtResource("1_card")

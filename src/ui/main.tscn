@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bey45jaa1bq6o" path="res://sys/map_data.gd" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://charjcrxtkq82" path="res://ui/encounter/encounter.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://05si5og1xfdv" path="res://sys/player.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" path="res://ui/inventory/inventory_ui.tscn" id="6_inv01"]
 
 [sub_resource type="Resource" id="Resource_1bvp3"]
 script = ExtResource("3_h2yge")
@@ -54,8 +55,23 @@ map_data = SubResource("Resource_1bvp3")
 unique_name_in_owner = true
 visible = false
 
+[node name="Inventory" parent="MainView" instance=ExtResource("6_inv01")]
+unique_name_in_owner = true
+visible = false
+
 [node name="Player" parent="." unique_id=491990234 instance=ExtResource("5_lquwl")]
 unique_name_in_owner = true
 
+[node name="InventoryButton" type="Button" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 50.0
+grow_horizontal = 0
+text = "Inventory"
+
 [connection signal="location_entered" from="MainView/Map" to="." method="_on_map_location_entered"]
 [connection signal="resolved" from="MainView/Encounter" to="." method="_on_encounter_resolved"]
+[connection signal="pressed" from="CanvasLayer/InventoryButton" to="." method="_on_inventory_button_pressed"]
